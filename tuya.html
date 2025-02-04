@@ -1,0 +1,98 @@
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventure Tours</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .tour, .testimonial, .offer { border: 1px solid #ccc; padding: 10px; margin: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Adventure Tours</h1>
+    
+    <div id="tours"></div>
+    <h2>Customer Testimonials</h2>
+    <div id="testimonials"></div>
+    <h2>Special Offers</h2>
+    <div id="offers"></div>
+    
+    <h2>Booking</h2>
+    <form id="bookingForm">
+        <label for="customerName">Name:</label>
+        <input type="text" id="customerName" name="customerName" required><br>
+        
+        <label for="customerEmail">Email:</label>
+        <input type="email" id="customerEmail" name="customerEmail" required><br>
+        
+        <label for="customerPhone">Phone:</label>
+        <input type="tel" id="customerPhone" name="customerPhone" required><br>
+        
+        <button type="submit">Confirm Booking</button>
+    </form>
+    
+    <script>
+        const tours = [
+            { id: 1, title: "Safari Adventure Tour", description: "Explore the wild with our guided safari tour.", price: "$999" },
+            { id: 2, title: "Mountain Hiking Expedition", description: "Join us for an exhilarating mountain hike.", price: "$499" }
+        ];
+        
+        const testimonials = [
+            { customerName: "Alice", message: "The Safari Adventure was amazing!" },
+            { customerName: "Bob", message: "Had a great time hiking!" }
+        ];
+        
+        const offers = [
+            { title: "Early Bird Discount", details: "Get 20% off if you book 3 months in advance!", expiryDate: "2025-05-01" },
+            { title: "Group Booking Special", details: "Book for 5 or more and receive a free meal!", expiryDate: "2025-06-01" }
+        ];
+        
+        function displayTours() {
+            const toursDiv = document.getElementById("tours");
+            tours.forEach(tour => {
+                const tourElement = document.createElement("div");
+                tourElement.classList.add("tour");
+                tourElement.innerHTML = `<h3>${tour.title}</h3><p>${tour.description}</p><p>Price: ${tour.price}</p>
+                <button onclick="bookTour(${tour.id})">Book Now</button>`;
+                toursDiv.appendChild(tourElement);
+            });
+        }
+        
+        function displayTestimonials() {
+            const testimonialsDiv = document.getElementById("testimonials");
+            testimonials.forEach(testimonial => {
+                const testimonialElement = document.createElement("div");
+                testimonialElement.classList.add("testimonial");
+                testimonialElement.innerText = `${testimonial.customerName}: ${testimonial.message}`;
+                testimonialsDiv.appendChild(testimonialElement);
+            });
+        }
+        
+        function displayOffers() {
+            const offersDiv = document.getElementById("offers");
+            offers.forEach(offer => {
+                const offerElement = document.createElement("div");
+                offerElement.classList.add("offer");
+                offerElement.innerText = `${offer.title}: ${offer.details} (Valid until: ${offer.expiryDate})`;
+                offersDiv.appendChild(offerElement);
+            });
+        }
+        
+        function bookTour(tourId) {
+            alert(`Booking for Tour ID: ${tourId}. Redirecting to booking section...`);
+            document.getElementById("bookingForm").scrollIntoView({ behavior: "smooth" });
+        }
+        
+        document.getElementById("bookingForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Thank you for your booking! You will receive a confirmation email shortly.");
+        });
+        
+        displayTours();
+        displayTestimonials();
+        displayOffers();
+    </script>
+</body>
+</html>
